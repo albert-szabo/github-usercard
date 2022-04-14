@@ -9,7 +9,7 @@ import axios from 'axios';
 
 axios.get('https://api.github.com/users/albert-szabo')
   .then(response => {
-    console.log(response);
+    console.log(response.data);
   })
   .catch(error => {
     console.error(error);
@@ -60,6 +60,51 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function gitHubCardMaker(gitHubInfo) {
+
+  const card = document.createElement('div');
+  const image = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const name = document.createElement('h3');
+  const username = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const linkToProfile = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  name.classList.add('name');
+  username.classList.add('username');
+
+  image.src = gitHubInfo.avatar_url;
+  name.textContent = gitHubInfo.name;
+  username.textContent = gitHubInfo.login;
+  location.textContent = gitHubInfo.location;
+  profile.textContent = 'Profile:';
+  linkToProfile.textContent = 'Link to profile:';
+  linkToProfile.href = gitHubInfo.html_url;
+  followers.textContent = `Followers: ${gitHubInfo.followers}`;
+  following.textContent = `Following: ${gitHubInfo.following}`;
+  bio.textContent = gitHubInfo.bio;
+
+  card.appendChild(image);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(linkToProfile);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card;
+
+}
 
 /*
   List of LS Instructors Github username's:
