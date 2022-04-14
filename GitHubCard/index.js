@@ -9,7 +9,7 @@ import axios from 'axios';
 
 axios.get('https://api.github.com/users/albert-szabo')
   .then(response => {
-    console.log(response.data);
+    document.querySelector('.cards').appendChild(gitHubCardMaker(response.data));
   })
   .catch(error => {
     console.error(error);
@@ -85,7 +85,7 @@ function gitHubCardMaker(gitHubInfo) {
   username.textContent = gitHubInfo.login;
   location.textContent = gitHubInfo.location;
   profile.textContent = 'Profile:';
-  linkToProfile.textContent = 'Link to profile:';
+  linkToProfile.textContent = 'link';
   linkToProfile.href = gitHubInfo.html_url;
   followers.textContent = `Followers: ${gitHubInfo.followers}`;
   following.textContent = `Following: ${gitHubInfo.following}`;
